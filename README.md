@@ -95,8 +95,8 @@ Put the `xrandr` commands in the *if-then* in the `/path/to/autorandr.sh` file y
 set -e
 
 # Is the external monitor connected?
-EXTERNAL_MONITOR=$( /sys/class/drm/card0-DP-1/status )
-if [ $EXTERNAL_MONITOR == "connected" ]; then
+EXTERNAL_MONITOR_STATUS=$( /sys/class/drm/card0-DP-1/status )
+if [ $EXTERNAL_MONITOR_STATUS == "connected" ]; then
 	TYPE="double"
     /usr/bin/xrandr ... (command for single+external monitors)
 else
@@ -109,7 +109,7 @@ logger -t autorandr "Switched to $TYPE monitor mode"
 
 # show a popup
 /usr/bin/notify-send --urgency=low -t 500 "Switched to $TYPE monitor configuration"
-lp
+
 exit 0
 ```
 
@@ -117,7 +117,7 @@ exit 0
 Test the bash script with the external monitor plugged or unplugged. You should see the monitor switch happening.
 
 ### Bugs
-Of course things might not be so *simple*. For example I've encountered an issue running the `xrandr` command to attach the external monitor: the monitor did not show up with the available resolutions, therefore the xrandr command failed.
+Of course things might not be so *simple*. For example I've encountered an issue running the `xrandr` command to attach the external monitor: the monitor did not show up with the available resolutions, therefore the `xrandr` command failed.
 
 With some more google-fu, turns out the solution is to set `Option "HotPlug" "false"` in your Xorg config file, wherever it is located (usually in `/usr/share/X11/xorg.conf.d/*`). If you don't have a config file with a `Device` directive, you need to manually create it.
 
@@ -144,7 +144,7 @@ If after reading this guide you think that I just wasted my time because there's
 
 - [The thread on HN that urged me to itch this scratch](https://news.ycombinator.com/item?id=11570940)
 - [The always GREAT Arch wiki](https://wiki.archlinux.org/index.php/Udev)
-- [This thread on StackExchange](http://unix.stackexchange.com/questions/4489/a-tool-for-automatically-applying-randr-configuration-when-external-display-is-pl/13917#13917)
+- [This thread on StackExchange](http://unix.stackexchange.com/questions/4489/a-tool-for-automatically-applying-randr-configuration-when-external-display-is-pl/13917)
 - [This outdated but still useful guide for Ubuntu](https://help.ubuntu.com/community/DynamicMultiMonitor) (the UDEV rule they describe didn't work for me, but it was a start on what I needed)
 - [man udevadm](http://linux.die.net/man/8/udevadm)
 
