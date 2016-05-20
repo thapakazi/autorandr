@@ -132,6 +132,8 @@ Section "Device"
 Restart X (or reboot) for this change to take effect.
 However after this change `Xorg` error reports started popping out upon startup, so I must have overriden some default settings of Xorg; well... what the hell, I'll fix that another time.
 
+I've also experienced that `xrandr` is sometimes slow to detect the new monitor resolutions (althouth the command shows them all correctly). In this case a delay in the BASH script above of a couple of seconds before runnning `xrandr` helped me out.
+
 ### Conclusions
 
 **Linux on desktop sucks**. Why did I have to spend an evening copying and pasting stuff from the Interwebz? Why did I have to figure out how things worked until I managed to hack together a BASH script triggered by a kernel event? OSX users have this utility *out of the box*.
