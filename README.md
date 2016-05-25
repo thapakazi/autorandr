@@ -1,9 +1,13 @@
 ## Automatic monitor switch when an external source is plugged
 
+
+*** This guide applies for Linux using the LXDE windows manager ***
+
+
 ### A brief overview
 Automatic monitor switch is a very useful utility when you often move your laptop. At home you have one or more external monitors, at the office you have another one or you code while commuting from A to B.
 
-Automatic monitor configuration switching can be accomplished the usual Linux way: a bit of scripting and a lot of googling.
+However, on my LXDE installation, apparently there's not a tool that automatically provides such a feature, so switching can be accomplished the usual Linux way: a bit of scripting and a lot of googling.
 Namely you have to intercept the [UDEV](https://en.wikipedia.org/wiki/Udev) event, if the graphic driver in the kernel supports your chipset.
 
 I wanted a solution that __does not sit on the background polling on kernel events__. I wanted something __triggered by__ kernel events, that's what UDEV is there for.
@@ -149,4 +153,3 @@ If after reading this guide you think that I just wasted my time because there's
 - [This thread on StackExchange](http://unix.stackexchange.com/questions/4489/a-tool-for-automatically-applying-randr-configuration-when-external-display-is-pl/13917)
 - [This outdated but still useful guide for Ubuntu](https://help.ubuntu.com/community/DynamicMultiMonitor) (the UDEV rule they describe didn't work for me, but it was a start on what I needed)
 - [man udevadm](http://linux.die.net/man/8/udevadm)
-
