@@ -101,7 +101,7 @@ set -e
 # Is the external monitor connected?
 EXTERNAL_MONITOR_STATUS=$( /sys/class/drm/card0-DP-1/status )
 if [ $EXTERNAL_MONITOR_STATUS == "connected" ]; then
-	TYPE="double"
+    TYPE="double"
     /usr/bin/xrandr ... (command for single+external monitors)
 else
     TYPE="single"
@@ -136,7 +136,9 @@ Section "Device"
 Restart X (or reboot) for this change to take effect.
 However after this change `Xorg` error reports started popping out upon startup, so I must have overriden some default settings of Xorg; well... what the hell, I'll fix that another time.
 
-I've also experienced that `xrandr` is sometimes slow to detect the new monitor resolutions (althouth the command shows them all correctly). In this case a delay in the BASH script above of a couple of seconds before runnning `xrandr` helped me out.
+I've also experienced that `xrandr` is sometimes slow to detect the new monitor resolutions (although the command shows them all correctly). As a workaround you can have `xrandr` poll the device configuration and exit when the switch is done.
+
+I've put a sample script `autorandr.sh` as a customizable template. Device ids are mines, YMMV.
 
 ### Conclusions
 
