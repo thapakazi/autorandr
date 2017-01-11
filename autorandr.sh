@@ -6,7 +6,8 @@ logger -t autorandr "ACTION: $ACTION" # "change"
 logger -t autorandr "SUBSYSTEM: $SUBSYSTEM" # "drm"
 
 # BUG: xrandr doesn't see the new device unless is polling
-watch -g xrandr &> /dev/null
+logger -t autorandr "Waiting for monitor configuration to change..."
+watch -g xrandr > /dev/null 2>&1
 
 EXTERNAL_MONITOR_STATUS=$( cat /sys/class/drm/card0-DP-1/status )
 
